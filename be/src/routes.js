@@ -1,31 +1,10 @@
 const express = require('express');
-const crypto = require('crypto');
-const connection = require('./database/connection');
+const EnterpriseController = require('./controllers/EnterpriseController');
 
 const routes = express.Router();
 
-routes.get('/enterprises', async (req, res) => {
-  const enterprises = await connection('enterprises').select('*');
+routes.get('/enterprises', EnterpriseController.index);
 
-  return res.json(enterprises);
-});
-
-routes.post('/enterprises', async (req, res) => {
-  const { name, email, wpp, cnpj, city, uf } = req.body;
-
-  const id = crypto.randomBytes(4).toString('HEX');
-
-  await connection('enterprises').insert({
-    id,
-    name,
-    email,
-    wpp,
-    cnpj,
-    city,
-    uf
-  });
-
-  return res.json({ id });
-});
+routes.post('/enterprises', EnterpriseController.store);
 
 module.exports = routes;
