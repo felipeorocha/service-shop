@@ -21,7 +21,16 @@ module.exports = {
   },
 
   async index(req, res) {
-    const services = await connection('services').select('*');
+    const { page = 1 } = req.query;
+
+    const [count] = await connection('services').count(); // [count] return the first response occurency
+
+    const services = await connection('services')
+      .limit(5)
+      .offset((page - 1) * 5)
+      .select('*');
+
+      res.header('X-Total-Count', count['count(*)']);
 
     return res.json(services);
   },
