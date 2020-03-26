@@ -26,9 +26,17 @@ module.exports = {
     const [count] = await connection('services').count(); // [count] return the first response occurency
 
     const services = await connection('services')
+      .join('enterprises', 'enterprises.id', '=', 'services.enterprise_id')
       .limit(5)
       .offset((page - 1) * 5)
-      .select('*');
+      .select([
+        'services.*',
+        'enterprises.name',
+        'enterprises.email',
+        'enterprises.cnpj',
+        'enterprises.city',
+        'enterprises.uf'
+      ]);
 
       res.header('X-Total-Count', count['count(*)']);
 
