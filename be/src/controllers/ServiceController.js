@@ -5,6 +5,9 @@ module.exports = {
     const { title, description, value } = req.body;
     const enterprise_id = req.headers.authorization;
 
+    if (!enterprise_id) {
+      return res.status(400).json({ error: 'Enterprise authorization required.' });
+    }
     // const result = await connection('services').insert({
     const [id] = await connection('services').insert({
       title,
@@ -26,6 +29,10 @@ module.exports = {
   async delete(req, res) {
     const { id } = req.params;
     const enterprise_id = req.headers.authorization;
+
+    if (!enterprise_id) {
+      return res.status(400).json({ error: 'Enterprise authorization required.' });
+    }
 
     const service = await connection('services').where('id', id).select('enterprise_id').first();
 
