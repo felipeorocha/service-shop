@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -14,6 +15,8 @@ module.exports = {
       return res.status(400).json({ error: `No enterprise ${id} ID found.` });
     }
 
-    return res.json(enterprise);
+    return res.json({
+      enterprise,
+      token: jwt.sign({ id },'saltTest#', { expiresIn: '7d' }) });
   }
 }
