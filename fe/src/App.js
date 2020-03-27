@@ -1,6 +1,8 @@
 import React from 'react';
-import Header from './Header';
+import Login from './pages/Login';
 
-const App = () => <Header />;
+import './global.css';
+
+const App = () => <Login />;
 
 export default App;
