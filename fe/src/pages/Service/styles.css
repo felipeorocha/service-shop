@@ -1,0 +1,64 @@
+.service-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 100vh; /* oculpar 100% da tela */
+  margin: 0 auto; /* conteudo sempre fique centralizado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-container .content {
+  width: 100%;
+  padding: 96px;
+  background: #f0f0f5;
+  box-shadow: 0 0 100px rgb(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service-container .content section {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-container section img {
+  align-self: center;
+}
+
+.service-container .content section h1 {
+  margin: 64px 0 32px;
+  font-size: 32px;
+}
+
+.service-container .content section p {
+  font-size: 18px;
+  color: #737380;
+  line-height: 32px;
+}
+
+.service-container .content form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.service-container .content form input,
+.service-container .content form textarea {
+  margin-top: 8px;
+}
+
+.service-container .content form textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 140px;
+  height: 60px;
+  color: #333;
+  border: 1px solid #dcdce6;
+  border-radius: 8px;
+  padding: 16px 24px;
+  line-height: 24px;
+}
