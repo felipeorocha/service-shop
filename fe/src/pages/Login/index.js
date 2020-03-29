@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 
 import './styles.css';
@@ -16,10 +17,10 @@ const Login = () => (
         <button className="button" type="submit">
           Login
         </button>
-        <a href="/register">
+        <Link className="redirect-link" to="/signup">
           <FiLogIn size={16} color="#E02041" />
           Sign Up
-        </a>
+        </Link>
       </form>
     </section>
     <img src={awsImg} alt="aws" />
