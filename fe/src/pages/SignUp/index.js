@@ -17,7 +17,7 @@ const SignUp = () => (
           tecnologicas
         </p>
         <Link className="redirect-link" to="/">
-          <FiArrowLeft size={16} color="#E02041" />
+          <FiArrowLeft size={16} color="#fc9802" />
           Sign In
         </Link>
       </section>

@@ -18,7 +18,7 @@ const Login = () => (
           Login
         </button>
         <Link className="redirect-link" to="/signup">
-          <FiLogIn size={16} color="#E02041" />
+          <FiLogIn size={16} color="#fc9802" />
           Sign Up
         </Link>
       </form>
