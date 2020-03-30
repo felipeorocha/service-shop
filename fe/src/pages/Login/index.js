@@ -20,6 +20,7 @@ const Login = () => {
       const response = await api.post('sessions', { id });
       localStorage.setItem('ENTERPRISE_ID', id);
       localStorage.setItem('ENTERPRISE_NAME', response.data.enterprise.name);
+      localStorage.setItem('ENTERPRISE_TOKEN', response.data.token);
       history.push('profile');
     } catch (err) {
       console.log(err);

@@ -11,6 +11,7 @@ import awsLogo from '../../assets/awsLogo.png';
 const Profile = () => {
   const enterpriseName = localStorage.getItem('ENTERPRISE_NAME');
   const enterpriseId = localStorage.getItem('ENTERPRISE_ID');
+  const enterpriseToken = localStorage.getItem('ENTERPRISE_TOKEN');
 
   const [services, setServices] = useState([]);
 
@@ -18,16 +19,28 @@ const Profile = () => {
     const fetchServices = async () => {
       const response = await api.get('profile', {
         headers: {
-          Authorization: `Bearer ${enterpriseId}`, // auth.token
+          ContentType: 'application/json',
+          Authorization: `Bearer ${enterpriseToken}`, // auth.token
         },
       });
       console.log('profile', response);
-      console.log('header', response.header);
-      console.log('headers', response.headers);
+      console.log(services);
       setServices(response.data);
     };
     fetchServices();
   }, [enterpriseId]);
+
+  const handleDeleteService = async id => {
+    try {
+      await api.delete(`services/${id}`, {
+        headers: {
+          Authorization: `Bearer ${enterpriseToken}`, // auth.token
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="profile-container">
@@ -50,8 +63,16 @@ const Profile = () => {
             <strong>Description</strong>
             <p>{service.description}</p>
             <strong>Value</strong>
-            <p>{service.value}</p>
-            <button type="button">
+            <p>
+              {Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              }).format(service.value)}
+            </p>
+            <button
+              onClick={() => handleDeleteService(service.id)}
+              type="button"
+            >
               <FiTrash2 size={20} color="a8a8b3" />
             </button>
           </li>
