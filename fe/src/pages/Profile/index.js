@@ -26,7 +26,7 @@ const Profile = () => {
       setServices(response.data);
     };
     fetchServices();
-  }, []);
+  }, [token]);
 
   const handleDeleteService = async id => {
     try {
