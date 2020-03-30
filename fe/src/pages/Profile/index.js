@@ -10,8 +10,7 @@ import awsLogo from '../../assets/awsLogo.png';
 
 const Profile = () => {
   const enterpriseName = localStorage.getItem('ENTERPRISE_NAME');
-  const enterpriseId = localStorage.getItem('ENTERPRISE_ID');
-  const enterpriseToken = localStorage.getItem('ENTERPRISE_TOKEN');
+  const token = localStorage.getItem('TOKEN');
 
   const history = useHistory();
 
@@ -21,20 +20,19 @@ const Profile = () => {
     const fetchServices = async () => {
       const response = await api.get('profile', {
         headers: {
-          Authorization: `Bearer ${enterpriseToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      console.log('profile', response.data.enterprise_id);
       setServices(response.data);
     };
     fetchServices();
-  }, [enterpriseId]);
+  }, []);
 
   const handleDeleteService = async id => {
     try {
       await api.delete(`services/${id}`, {
         headers: {
-          Authorization: `Bearer ${enterpriseToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

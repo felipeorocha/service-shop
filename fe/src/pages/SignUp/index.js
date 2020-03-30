@@ -32,7 +32,6 @@ const SignUp = () => {
 
     try {
       const response = await api.post('enterprises', data);
-      console.log('register', response);
       alert(`Your user id: ${response.data.id}`);
       history.push('/');
     } catch (err) {

@@ -15,7 +15,7 @@ const Service = () => {
 
   const history = useHistory();
 
-  const enterpriseToken = localStorage.getItem('ENTERPRISE_TOKEN');
+  const token = localStorage.getItem('TOKEN');
 
   const data = {
     title,
@@ -27,12 +27,11 @@ const Service = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post('services', data, {
+      await api.post('services', data, {
         headers: {
-          Authorization: `Bearer ${enterpriseToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      console.log('service', response);
 
       history.push('/profile');
     } catch (err) {
