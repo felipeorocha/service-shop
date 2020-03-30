@@ -3,7 +3,7 @@ const connection = require('../database/connection');
 module.exports = {
   async store(req, res) {
     const { title, description, value } = req.body;
-    const enterprise_id = req.headers.authorization;
+    const enterprise_id = req.userIdToken;
 
     if (!enterprise_id) {
       return res.status(400).json({ error: 'Enterprise authorization required.' });
