@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
 
 import api from '../../services/api';
@@ -13,18 +13,18 @@ const Profile = () => {
   const enterpriseId = localStorage.getItem('ENTERPRISE_ID');
   const enterpriseToken = localStorage.getItem('ENTERPRISE_TOKEN');
 
+  const history = useHistory();
+
   const [services, setServices] = useState([]);
 
   useEffect(() => {
     const fetchServices = async () => {
       const response = await api.get('profile', {
         headers: {
-          ContentType: 'application/json',
-          Authorization: `Bearer ${enterpriseToken}`, // auth.token
+          Authorization: `Bearer ${enterpriseToken}`,
         },
       });
       console.log('profile', response);
-      console.log(services);
       setServices(response.data);
     };
     fetchServices();
@@ -34,12 +34,20 @@ const Profile = () => {
     try {
       await api.delete(`services/${id}`, {
         headers: {
-          Authorization: `Bearer ${enterpriseToken}`, // auth.token
+          Authorization: `Bearer ${enterpriseToken}`,
         },
       });
+
+      setServices(services.filter(service => service.id !== id));
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+
+    history.push('/');
   };
 
   return (
@@ -50,7 +58,7 @@ const Profile = () => {
         <Link className="button" to="/services/new">
           Add service
         </Link>
-        <button type="button">
+        <button onClick={handleLogout} type="button">
           <FiPower size={18} color="#fc9802" />
         </button>
       </header>
