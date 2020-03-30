@@ -53,9 +53,9 @@ module.exports = {
 
     const service = await connection('services').where('id', id).select('enterprise_id').first();
 
-    if (service.enterprise_id !== enterprise_id) {
-      return res.status(401).json({ error: 'Operation not permitted.' });
-    }
+    // if (service.enterprise_id !== enterprise_id) {
+    //   return res.status(401).json({ error: 'Operation not permitted.' });
+    // }
 
     await connection('services').where('id', id).delete();
 

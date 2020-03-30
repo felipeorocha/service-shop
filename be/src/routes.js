@@ -16,11 +16,12 @@ routes.post('/sessions', SessionController.store);
 routes.get('/enterprises', EnterpriseController.index);
 routes.post('/enterprises', EnterpriseController.store);
 routes.put('/enterprises', authMiddleware, EnterpriseController.update);
+routes.delete('/enterprises/:id', authMiddleware, EnterpriseController.delete);
 // Service routes
-routes.post('/services', ServiceController.store);
+routes.post('/services', authMiddleware, ServiceController.store);
 routes.get('/services', ServiceController.index);
-routes.delete('/services/:id', ServiceController.delete);
+routes.delete('/services/:id', authMiddleware, ServiceController.delete);
 // Profile route
-routes.get('/profile', ProfileController.index);
+routes.get('/profile', authMiddleware, ProfileController.index);
 
 module.exports = routes;

@@ -27,7 +27,7 @@ module.exports = {
   },
 
   async update(req, res) {
-    const { name, email } =  req.body;
+    const { name, email } = req.body;
 
     const enterpriseData = await connection('enterprises').where('id', req.userIdToken).select('name', 'email');
 
@@ -52,5 +52,21 @@ module.exports = {
     await connection('enterprises').update({ name, email }).where('id', req.userIdToken);
 
     return res.json({ success: true });
+  },
+
+  async delete(req, res) {
+    const { id } = req.params;
+    const enterprise_id = req.headers.authorization;
+
+    if (!enterprise_id) {
+      return res.status(400).json({ error: 'Enterprise authorization required.' });
+    }
+
+    const enterprise = await connection('enterprises').where('id', id).first();
+    // const enterprise = await connection('enterprises').where('id', id).select('enterprise_id').first();
+
+    await connection('enterprises').where('id', id).delete();
+
+    return res.status(204).send();
   }
 }
