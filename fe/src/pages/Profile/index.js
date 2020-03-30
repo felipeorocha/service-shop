@@ -24,7 +24,7 @@ const Profile = () => {
           Authorization: `Bearer ${enterpriseToken}`,
         },
       });
-      console.log('profile', response);
+      console.log('profile', response.data.enterprise_id);
       setServices(response.data);
     };
     fetchServices();
