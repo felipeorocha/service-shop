@@ -38,7 +38,7 @@ const Profile = () => {
 
       setServices(services.filter(service => service.id !== id));
     } catch (e) {
-      console.log(e);
+      console.log(e); // eslint-disable-line no-console
     }
   };
 

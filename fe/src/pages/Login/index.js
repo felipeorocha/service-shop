@@ -23,7 +23,7 @@ const Login = () => {
       localStorage.setItem('TOKEN', response.data.token);
       history.push('profile');
     } catch (err) {
-      console.log(err);
+      console.log(err); // eslint-disable-line no-console
     }
   };
 

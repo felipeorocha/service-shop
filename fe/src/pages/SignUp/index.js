@@ -32,10 +32,10 @@ const SignUp = () => {
 
     try {
       const response = await api.post('enterprises', data);
-      alert(`Your user id: ${response.data.id}`);
+      alert(`Your user id: ${response.data.id}`); // eslint-disable-line no-alert
       history.push('/');
     } catch (err) {
-      console.log(err);
+      console.log(err); // eslint-disable-line no-console
     }
   };
 
