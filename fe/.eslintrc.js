@@ -40,6 +40,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     camelcase: 'off',
     'arrow-body-style': 'off',
+    'arrow-parens': 'off',
     'no-console': ['error'],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn'
